@@ -20,9 +20,9 @@ def message(text, _color):
     print(f'{_color}{text}{_color}')
 
 parser = argparse.ArgumentParser(description='XML Editor')
-parser.add_argument('-a', '--append', type=str, help='Append')
-parser.add_argument('-d', '--delete', type=str, help='Delete')
-parser.add_argument('-m', '--modify', type=str, help='modify')
+parser.add_argument('-a', '--append', action='store_true', help='Append')
+parser.add_argument('-d', '--delete', action='store_true', help='Delete')
+parser.add_argument('-m', '--modify', action='store_true', help='modify')
 parser.add_argument('-p', '--path', type=str, help='Path to XML file')
 parser.add_argument('-n', '--name', type=str,help='Name of property')
 parser.add_argument('-v', '--value', type=str, help='Value of property')
