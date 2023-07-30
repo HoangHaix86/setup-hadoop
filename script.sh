@@ -17,7 +17,7 @@ sudo apt install -y open-vm-tools-desktop
 # Install openssh-server
 sudo apt-get install -y openssh-server python3-lxml openjdk-8-jdk git wget
 
-
+export HADOOP_VERSION=3.3.6
 wget "https://dlcdn.apache.org/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz" &&
 tar -xvzf hadoop-$HADOOP_VERSION.tar.gz &&
 mv -f hadoop-$HADOOP_VERSION $HADOOP_HOME &&
@@ -36,7 +36,6 @@ sudo chmod +x /usr/local/bin/xmleditor.py &&
 
 sudo chmod -R a+rwx /opt &&
 
-export HADOOP_VERSION=3.3.6 &&
 export HADOOP_HOME=/opt/hadoop &&
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 &&
 export PATH=\$PATH:\$JAVA_HOME/bin &&
