@@ -23,8 +23,8 @@ cat ~/.ssh/id_rsa.pub >>~/.ssh/authorized_keys &&
 sudo chmod 0600 ~/.ssh/authorized_keys
 
 # add xmleditor
-sudo cp ./xmleditor.py /usr/local/bin/xmleditor.py
-sudo chmod +x /usr/local/bin/xmleditor.py
+sudo cp ./**/xmleditor.py /usr/local/bin/xmleditor.py &&
+chmod a+x /usr/local/bin/xmleditor.py
 
 sudo chmod -R a+rwx /opt
 
