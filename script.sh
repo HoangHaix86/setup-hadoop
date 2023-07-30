@@ -25,7 +25,7 @@ sudo chmod -R 777 /opt
 
 echo "export HADOOP_HOME=/opt/hadoop" >>~/.bashrc &&
 echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >>~/.bashrc &&
-echo "export PATH=\$PATH:\$JAVA_HOME/bin" >>~/.bashrc &&
+echo "export PATH=\$PATH:\$JAVA_HOME/bin" >>~/.bashrc
 source ~/.bashrc
 
 # install hadoop
@@ -44,14 +44,14 @@ echo "export PATH=\$PATH:\$HADOOP_HOME/sbin" >>~/.bashrc &&
 echo "export HADOOP_MAPRED_HOME=\$HADOOP_HOME" >>~/.bashrc &&
 echo "export HADOOP_COMMON_HOME=\$HADOOP_HOME" >>~/.bashrc &&
 echo "export HADOOP_HDFS_HOME=\$HADOOP_HOME" >>~/.bashrc &&
-echo "export YARN_HOME=\$HADOOP_HOME" >>~/.bashrc &&
+echo "export YARN_HOME=\$HADOOP_HOME" >>~/.bashrc
 source ~/.bashrc
 
 echo "export HDFS_NAMENODE_USER=root" >>~/.bashrc &&
 echo "export HDFS_DATANODE_USER=root" >>~/.bashrc &&
 echo "export HDFS_SECONDARYNAMENODE_USER=root" >>~/.bashrc &&
 echo "export YARN_RESOURCEMANAGER_USER=root" >>~/.bashrc &&
-echo "export YARN_NODEMANAGER_USER=root" >>~/.bashrc &&
+echo "export YARN_NODEMANAGER_USER=root" >>~/.bashrc
 source ~/.bashrc
 
 # ssh

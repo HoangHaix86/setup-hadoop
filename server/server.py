@@ -29,6 +29,7 @@ class Server:
                 
                 await self.send(websocket, data)
                 await asyncio.sleep(3)
+            
         except websockets.exceptions.ConnectionClosed:
             print("Connection closed")
             return
@@ -51,10 +52,10 @@ class Server:
             data = json.loads(message)
             pprint(data)
             if data['type'] == "GET":
-                await self.get_folder(websocket)
+                self.get_folder(websocket)
                 return
             if data['type'] == "DEL":
-                await self.delete_folder(websocket, data['vm'])
+                self.delete_folder(websocket, data['vm'])
                 return
         
             
