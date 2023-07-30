@@ -12,7 +12,8 @@ class Server:
         self.path = r'C:\Users\HoangHai\Documents\Virtual Machines'
 
     async def send(self, websocket, data):
-        await websocket.send(json.dumps(data))
+        json_string = json.dumps(data)
+        await websocket.send(json_string)
 
     async def get_folder(self, websocket):
         try:
@@ -24,31 +25,35 @@ class Server:
                 d = os.listdir(self.path)
                 for i in d:
                     self.vms.update({slugify(i): i})
+                data['data'] = self.vms
                 
-                await self.send(websocket, json.dumps(data))
+                await self.send(websocket, data)
                 await asyncio.sleep(3)
         except websockets.exceptions.ConnectionClosed:
             print("Connection closed")
             return
 
     async def delete_folder(self, websocket, vm):
+        pprint(vm)
         shutil.rmtree(f'{self.path}\\{self.vms[vm]}')
         del self.vms[vm]
         data = {
-            "type": "DELETE",
+            "type": "DEl",
             "data": {},
             "message": "Deleted"
         }
-        await self.send(websocket, json.dumps(data))
+        await self.send(websocket, data)
 
 
     async def handler(self, websocket):
+        pprint(websocket)
         async for message in websocket:
             data = json.loads(message)
+            pprint(data)
             if data['type'] == "GET":
                 await self.get_folder(websocket)
                 return
-            if data['type'] == "DELETE":
+            if data['type'] == "DEL":
                 await self.delete_folder(websocket, data['vm'])
                 return
         

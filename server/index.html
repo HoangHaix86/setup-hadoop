@@ -61,7 +61,10 @@
                 </i>
                 <p>{{vms[key]}}</p>
               </div>
-              <i class="w-6 h6 text-red-600 cursor-pointer" v-on:click="delVM(key)"->
+              <i
+                v-on:click="delVM(key)"
+                class="w-6 h6 text-red-600 cursor-pointer"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="icon icon-tabler icon-tabler-trash"
@@ -100,7 +103,7 @@
         data() {
           return {
             wss: null,
-            vms: [],
+            vms: {},
           };
         },
         methods: {
@@ -130,8 +133,9 @@
             }).showToast();
           },
           delVM(name) {
-            this.toast("Delete " + name);
-            // this.wss.send(this.encode({ type: "DEL", data: name }));
+            const e = this.encode({ type: "DEL", data: name })
+            console.log(e);
+            this.wss.send(e);
           },
         },
         created() {
@@ -139,13 +143,19 @@
           this.wss.onopen = () => {
             this.toast("WebSocket Client Connected");
           };
+
           this.wss.onmessage = (message) => {
-            console.log(JSON.parse(message.data));
-            this.vms = this.decode(message.data).data;
+            const jsonData = this.decode(message.data);
+            this.vms = jsonData.data;
+            if (jsonData.type == "DEL") {
+              this.toast("Delete VM Success");
+            }
           };
+
           this.wss.onclose = () => {
             this.toast("WebSocket Client Disconnected");
           };
+
           this.wss.onerror = (err) => {
             console.log(err);
           };
