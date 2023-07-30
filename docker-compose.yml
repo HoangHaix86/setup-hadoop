@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  name-node:
+    container_name: namenode
+    image: hadoop-base
+    tty: true
+    networks:
+      - default
+
+  data-node-1:
+    container_name: datanode
+    image: hadoop-base
+    tty: true
+    networks:
+      - default
+
+networks:
+  default:
+    name: hadoop-network
+    driver: bridge
