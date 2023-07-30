@@ -28,15 +28,15 @@ source ~/.bashrc
 
 # install hadoop
 HADOOP_VERSION=3.3.6 &&
-wget https://dlcdn.apache.org/hadoop/common/hadoop-3.3.6/hadoop-$HADOOP_VERSION.tar.gz &&
+sudo wget https://dlcdn.apache.org/hadoop/common/hadoop-3.3.6/hadoop-$HADOOP_VERSION.tar.gz &&
 tar -xvzf hadoop-$HADOOP_VERSION.tar.gz &&
 mv -f hadoop-$HADOOP_VERSION $HADOOP_HOME &&
 rm hadoop-$HADOOP_VERSION.tar.gz
 
 # add environment variables
-echo "export JAVA_HOME=\$JAVA_HOME" >>$HADOOP_HOME/etc/hadoop/hadoop-env.sh
+sudo echo "export JAVA_HOME=\$JAVA_HOME" >>$HADOOP_HOME/etc/hadoop/hadoop-env.sh
 
-echo "export HADOOP_LOG_DIR=\$HADOOP_HOME/logs" >>~/.bashrc &&
+sudo echo "export HADOOP_LOG_DIR=\$HADOOP_HOME/logs" >>~/.bashrc &&
 echo "export HADOOP_CONF_DIR=\$HADOOP_HOME/etc/hadoop" >>~/.bashrc &&
 echo "export PATH=\$PATH:\$HADOOP_HOME/bin" >>~/.bashrc &&
 echo "export PATH=\$PATH:\$HADOOP_HOME/sbin" >>~/.bashrc &&
@@ -46,7 +46,7 @@ echo "export HADOOP_HDFS_HOME=\$HADOOP_HOME" >>~/.bashrc &&
 echo "export YARN_HOME=\$HADOOP_HOME" >>~/.bashrc &&
 source ~/.bashrc
 
-echo "export HDFS_NAMENODE_USER=root" >>~/.bashrc &&
+sudo echo "export HDFS_NAMENODE_USER=root" >>~/.bashrc &&
 echo "export HDFS_DATANODE_USER=root" >>~/.bashrc &&
 echo "export HDFS_SECONDARYNAMENODE_USER=root" >>~/.bashrc &&
 echo "export YARN_RESOURCEMANAGER_USER=root" >>~/.bashrc &&
@@ -54,9 +54,9 @@ echo "export YARN_NODEMANAGER_USER=root" >>~/.bashrc &&
 source ~/.bashrc
 
 # ssh
-ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa &&
+sudo ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa &&
 cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys &&
-chmod 0600 ~/.ssh/authorized_keys
+sudo chmod 0600 ~/.ssh/authorized_keys
 
 # add host
 # echo "$IP_MASTER master" >>/etc/hosts &&
