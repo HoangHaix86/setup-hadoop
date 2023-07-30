@@ -15,7 +15,7 @@ sudo apt-get update && sudo apt-get upgrade -y
 # sudo apt install -y git open-vm-tools-desktop
 
 # Install openssh-server
-sudo apt-get install -y openssh-server python3-lxml openjdk-8-jdk git
+sudo apt-get install -y openssh-server python3-lxml openjdk-8-jdk git wget
 
 # ssh
 ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa &&
@@ -57,7 +57,6 @@ echo "export HADOOP_COMMON_HOME=\$HADOOP_HOME" >>~/.bashrc
 echo "export HADOOP_HDFS_HOME=\$HADOOP_HOME" >>~/.bashrc
 echo "export YARN_HOME=\$HADOOP_HOME" >>~/.bashrc
 
-wget -h
 # install hadoop
 URL="https://dlcdn.apache.org/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz"
 wget $URL &&
