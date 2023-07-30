@@ -7,7 +7,6 @@ IP_MASTER=""
 IP_SLAVE_1=""
 IP_SLAVE_2=""
 IP_SLAVE_3=""
-HADOOP_VERSION=3.3.6
 
 # Update vs upgrade
 sudo apt-get update && sudo apt-get upgrade -y
@@ -18,12 +17,19 @@ sudo apt-get update && sudo apt-get upgrade -y
 # Install openssh-server
 sudo apt-get install -y openssh-server python3-lxml openjdk-8-jdk git
 
+# ssh
+ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa &&
+    cat ~/.ssh/id_rsa.pub >>~/.ssh/authorized_keys &&
+    sudo chmod 0600 ~/.ssh/authorized_keys
+
 # add xmleditor
 sudo cp ./xmleditor.py /usr/local/bin/xmleditor.py &&
     sudo chmod +x /usr/local/bin/xmleditor.py
 
 sudo chmod -R a+rwx /opt
 
+
+export HADOOP_VERSION=3.3.6
 export HADOOP_HOME=/opt/hadoop
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export PATH=\$PATH:\$JAVA_HOME/bin
@@ -37,6 +43,7 @@ export HADOOP_COMMON_HOME=\$HADOOP_HOME
 export HADOOP_HDFS_HOME=\$HADOOP_HOME
 export YARN_HOME=\$HADOOP_HOME
 
+echo "export HADOOP_VERSION=3.3.6" >>~/.bashrc
 echo "export HADOOP_HOME=/opt/hadoop" >>~/.bashrc
 echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >>~/.bashrc
 echo "export PATH=\$PATH:\$JAVA_HOME/bin" >>~/.bashrc
@@ -51,9 +58,7 @@ echo "export HADOOP_HDFS_HOME=\$HADOOP_HOME" >>~/.bashrc
 echo "export YARN_HOME=\$HADOOP_HOME" >>~/.bashrc
 
 # install hadoop
-URL="https://dlcdn.apache.org/hadoop/common/hadoop-3.3.6/hadoop-$HADOOP_VERSION.tar.gz"
-echo $URL
-wget --help
+URL="https://dlcdn.apache.org/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz"
 wget $URL &&
     tar -xvzf hadoop-$HADOOP_VERSION.tar.gz &&
     mv -f hadoop-$HADOOP_VERSION $HADOOP_HOME &&
@@ -61,10 +66,6 @@ wget $URL &&
     # add environment variables
     echo "export JAVA_HOME=\$JAVA_HOME" >>$HADOOP_HOME/etc/hadoop/hadoop-env.sh
 
-# ssh
-ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa &&
-    cat ~/.ssh/id_rsa.pub >>~/.ssh/authorized_keys &&
-    sudo chmod 0600 ~/.ssh/authorized_keys
 
 # add host
 # echo "$IP_MASTER master" >>/etc/hosts &&
