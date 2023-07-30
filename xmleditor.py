@@ -4,21 +4,6 @@ import argparse
 from pprint import pprint
 import os
 
-
-class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKCYAN = '\033[96m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
-
-def message(text, _color):
-    print(f'{_color}{text}{_color}')
-
 parser = argparse.ArgumentParser(description='XML Editor')
 parser.add_argument('-a', '--append', action='store_true', help='Append')
 parser.add_argument('-d', '--delete', action='store_true', help='Delete')
@@ -29,7 +14,7 @@ parser.add_argument('-v', '--value', type=str, help='Value of property')
 args = parser.parse_args()
 
 if (args.path is None or not os.path.exists(args.path)): 
-    message('Error file!', bcolors.FAIL)
+    print('Error file!')
     exit()
 
 if (args.append):
@@ -47,6 +32,6 @@ if (args.append):
 
     tree.write(args.path, pretty_print=True, xml_declaration=True, encoding='utf-8')
 
-    message('Property added', bcolors.OKGREEN)
+    print('Property added')
 
 # xmleditor -a -p ./etc/hadoop/core-site.xml -n fs.defaultFS -v hdfs://localhost:9000

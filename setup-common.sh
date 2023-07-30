@@ -63,6 +63,10 @@ echo "export HADOOP_COMMON_HOME=\$HADOOP_HOME" >>/etc/environment
 echo "export HADOOP_HDFS_HOME=\$HADOOP_HOME" >>/etc/environment
 echo "export YARN_HOME=\$HADOOP_HOME" >>/etc/environment
 echo "export HADOOP_CLASSPATH=\$JAVA_HOME/lib/tools.jar" >>/etc/environment
+echo "export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native" >> /etc/environment
+echo "export HADOOP_OPTS=-Djava.library.path=\$HADOOP_HOME/lib/native" >> etc/environment
+echo "export HADOOP_STREAMING=\$HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-3.2.3.jar" >> etc/environment
+echo "export HADOOP_OPTS=-Djava.net.preferIPv4Stack=true" >> etc/environment
 source /etc/environment
 
 # install hadoop
@@ -72,15 +76,10 @@ sudo mv -f hadoop-$HADOOP_VERSION $HADOOP_HOME &&
 rm hadoop-$HADOOP_VERSION.tar.gz &&
 echo "export JAVA_HOME=\$JAVA_HOME" >>$HADOOP_HOME/etc/hadoop/hadoop-env.sh
 
-# add host
-# echo "$IP_MASTER master" >>/etc/hosts
-# echo "$IP_SLAVE_1 master" >>/etc/hosts
-# echo "$IP_SLAVE_2 master" >>/etc/hosts
-# echo "$IP_SLAVE_3 master" >>/etc/hosts
-
-# # config hadoop
-# # core-site.xml
-xmleditor.py -a -p $HADOOP_CONF_DIR/core-site.xml -n fs.defaultFS -v hdfs://master:9000
+# config hadoop
+# core-site.xml
+xmleditor.py -a -p $HADOOP_CONF_DIR/core-site.xml -n fs.defaultFS -v hdfs://namenode:9000
+xmleditor.py -a -p $HADOOP_CONF_DIR/core-site.xml -n dfs.permissions -v false
 
 # # hdfs-site.xml
 xmleditor.py -a -p $HADOOP_CONF_DIR/hdfs-site.xml -n dfs.replication -v 3
@@ -90,17 +89,21 @@ xmleditor.py -a -p $HADOOP_CONF_DIR/hdfs-site.xml -n dfs.datanode.data.dir -v fi
 # # yarn-site.xml
 xmleditor.py -a -p $HADOOP_CONF_DIR/yarn-site.xml -n yarn.nodemanager.aux-services -v mapreduce_shuffle
 xmleditor.py -a -p $HADOOP_CONF_DIR/yarn-site.xml -n yarn.nodemanager.aux-services.mapreduce.shuffle.class -v org.apache.hadoop.mapred.ShuffleHandler
-xmleditor.py -a -p $HADOOP_CONF_DIR/yarn-site.xml -n yarn.resourcemanager.hostname -v master
+xmleditor.py -a -p $HADOOP_CONF_DIR/yarn-site.xml -n yarn.resourcemanager.hostname -v namenode
 
 # # mapred-site.xml
 xmleditor.py -a -p $HADOOP_CONF_DIR/mapred-site.xml -n mapreduce.framework.name -v yarn
-xmleditor.py -a -p $HADOOP_CONF_DIR/mapred-site.xml -n mapreduce.jobtracker.address -v master:54311
+xmleditor.py -a -p $HADOOP_CONF_DIR/mapred-site.xml -n mapreduce.jobtracker.address -v namenode:54311
 
 sudo mkdir -p /opt/hadoop/data/namenode
 sudo mkdir -p /opt/hadoop/data/datanode
 
-# # master
-# # echo master >$HADOOP_HOME/etc/hadoop/masters
+# master
+echo $NAMENODE >$HADOOP_HOME/etc/hadoop/masters
 
-# # workers
-# # echo slave_1 >$HADOOP_HOME/etc/hadoop/workers
+# workers
+echo $DATANODE1 >$HADOOP_HOME/etc/hadoop/workers
+echo $DATANODE2 >>$HADOOP_HOME/etc/hadoop/workers
+echo $DATANODE3 >>$HADOOP_HOME/etc/hadoop/workers
+
+/opt/hadoop/bin/hadoop namenode –format
