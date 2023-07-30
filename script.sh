@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # https://github.com/HoangHaix86/setup-hadoop.git
-
+# git clone https://github.com/HoangHaix86/setup-hadoop.git && cd setup-hadoop && chmod +x script.sh && ./script.sh
 IP_MASTER=""
 IP_SLAVE_1=""
 IP_SLAVE_2=""
@@ -29,7 +29,7 @@ echo "export PATH=\$PATH:\$JAVA_HOME/bin" >>~/.bashrc &&
 source ~/.bashrc
 
 # install hadoop
-sudo wget https://dlcdn.apache.org/hadoop/common/hadoop-3.3.6/hadoop-$HADOOP_VERSION.tar.gz &&
+source ~/.bashrc && sudo wget https://dlcdn.apache.org/hadoop/common/hadoop-3.3.6/hadoop-$HADOOP_VERSION.tar.gz &&
 tar -xvzf hadoop-$HADOOP_VERSION.tar.gz &&
 mv -f hadoop-$HADOOP_VERSION $HADOOP_HOME &&
 rm hadoop-$HADOOP_VERSION.tar.gz
