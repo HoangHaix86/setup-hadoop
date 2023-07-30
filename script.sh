@@ -2,6 +2,7 @@
 
 # https://github.com/HoangHaix86/setup-hadoop.git
 # git clone https://github.com/HoangHaix86/setup-hadoop.git && cd setup-hadoop && chmod +x script.sh && ./script.sh
+
 IP_MASTER=""
 IP_SLAVE_1=""
 IP_SLAVE_2=""
@@ -12,14 +13,14 @@ HADOOP_VERSION=3.3.6
 sudo apt-get update && sudo apt-get upgrade -y
 
 # for setup
-# sudo apt install -y git open-vm-tools-desktop 
+# sudo apt install -y git open-vm-tools-desktop
 
 # Install openssh-server
 sudo apt-get install -y openssh-server python3-lxml openjdk-8-jdk git
 
 # add xmleditor
 sudo cp ./xmleditor.py /usr/local/bin/xmleditor.py &&
-sudo chmod +x /usr/local/bin/xmleditor.py
+    sudo chmod +x /usr/local/bin/xmleditor.py
 
 sudo chmod -R a+rwx /opt
 
@@ -36,33 +37,31 @@ export HADOOP_COMMON_HOME=\$HADOOP_HOME
 export HADOOP_HDFS_HOME=\$HADOOP_HOME
 export YARN_HOME=\$HADOOP_HOME
 
+echo "export HADOOP_HOME=/opt/hadoop" >>~/.bashrc
+echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >>~/.bashrc
+echo "export PATH=\$PATH:\$JAVA_HOME/bin" >>~/.bashrc
 
-echo "export HADOOP_HOME=/opt/hadoop" >> ~/.bashrc
-echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >> ~/.bashrc
-echo "export PATH=\$PATH:\$JAVA_HOME/bin" >> ~/.bashrc
-
-echo "export HADOOP_LOG_DIR=\$HADOOP_HOME/logs" >> ~/.bashrc
-echo "export HADOOP_CONF_DIR=\$HADOOP_HOME/etc/hadoop" >> ~/.bashrc
-echo "export PATH=\$PATH:\$HADOOP_HOME/bin" >> ~/.bashrc
-echo "export PATH=\$PATH:\$HADOOP_HOME/sbin" >> ~/.bashrc
-echo "export HADOOP_MAPRED_HOME=\$HADOOP_HOME" >> ~/.bashrc
-echo "export HADOOP_COMMON_HOME=\$HADOOP_HOME" >> ~/.bashrc
-echo "export HADOOP_HDFS_HOME=\$HADOOP_HOME" >> ~/.bashrc
-echo "export YARN_HOME=\$HADOOP_HOME" >> ~/.bashrc
-
+echo "export HADOOP_LOG_DIR=\$HADOOP_HOME/logs" >>~/.bashrc
+echo "export HADOOP_CONF_DIR=\$HADOOP_HOME/etc/hadoop" >>~/.bashrc
+echo "export PATH=\$PATH:\$HADOOP_HOME/bin" >>~/.bashrc
+echo "export PATH=\$PATH:\$HADOOP_HOME/sbin" >>~/.bashrc
+echo "export HADOOP_MAPRED_HOME=\$HADOOP_HOME" >>~/.bashrc
+echo "export HADOOP_COMMON_HOME=\$HADOOP_HOME" >>~/.bashrc
+echo "export HADOOP_HDFS_HOME=\$HADOOP_HOME" >>~/.bashrc
+echo "export YARN_HOME=\$HADOOP_HOME" >>~/.bashrc
 
 # install hadoop
 wget https://dlcdn.apache.org/hadoop/common/hadoop-3.3.6/hadoop-$HADOOP_VERSION.tar.gz &&
-tar -xzf hadoop-$HADOOP_VERSION.tar.gz &&
-mv -f hadoop-$HADOOP_VERSION $HADOOP_HOME &&
-rm hadoop-$HADOOP_VERSION.tar.gz &&
-# add environment variables
-echo "export JAVA_HOME=\$JAVA_HOME" >>$HADOOP_HOME/etc/hadoop/hadoop-env.sh
+    tar -xzf hadoop-$HADOOP_VERSION.tar.gz &&
+    mv -f hadoop-$HADOOP_VERSION $HADOOP_HOME &&
+    rm hadoop-$HADOOP_VERSION.tar.gz &&
+    # add environment variables
+    echo "export JAVA_HOME=\$JAVA_HOME" >>$HADOOP_HOME/etc/hadoop/hadoop-env.sh
 
 # ssh
 ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa &&
-cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys &&
-sudo chmod 0600 ~/.ssh/authorized_keys
+    cat ~/.ssh/id_rsa.pub >>~/.ssh/authorized_keys &&
+    sudo chmod 0600 ~/.ssh/authorized_keys
 
 # add host
 # echo "$IP_MASTER master" >>/etc/hosts &&
@@ -89,7 +88,7 @@ xmleditor.py -a -p $HADOOP_HOME/etc/hadoop/mapred-site.xml -n mapreduce.framewor
 xmleditor.py -a -p $HADOOP_HOME/etc/hadoop/mapred-site.xml -n mapreduce.jobtracker.address -v master:54311
 
 sudo mkdir -p /opt/hadoop/data/namenode &&
-sudo mkdir -p /opt/hadoop/data/datanode
+    sudo mkdir -p /opt/hadoop/data/datanode
 
 # master
 # echo master >$HADOOP_HOME/etc/hadoop/masters
