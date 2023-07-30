@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # https://github.com/HoangHaix86/setup-hadoop.git
-# rm -rf setup-hadoop && git clone https://github.com/HoangHaix86/setup-hadoop.git && chmod +x ./setup-hadoop/script.sh && sudo ./setup-hadoop/script.sh
+# rm -rf setup-hadoop git clone https://github.com/HoangHaix86/setup-hadoop.git chmod +x ./setup-hadoop/script.sh sudo ./setup-hadoop/script.sh
 
 IP_MASTER=""
 IP_SLAVE_1=""
@@ -18,12 +18,12 @@ sudo apt install -y open-vm-tools-desktop
 sudo apt-get install -y openssh-server python3-lxml openjdk-8-jdk git wget
 
 # ssh
-ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa -y &&
-cat ~/.ssh/id_rsa.pub >>~/.ssh/authorized_keys &&
+ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa -y
+cat ~/.ssh/id_rsa.pub >>~/.ssh/authorized_keys
 sudo chmod 0600 ~/.ssh/authorized_keys
 
 # add xmleditor
-sudo cp ./**/xmleditor.py /usr/local/bin/xmleditor.py &&
+sudo cp ./**/xmleditor.py /usr/local/bin/xmleditor.py
 chmod a+x /usr/local/bin/xmleditor.py
 
 sudo chmod -R a+rwx /opt
@@ -58,10 +58,10 @@ echo "export YARN_HOME=\$HADOOP_HOME" >>~/.bashrc
 source ~/.bashrc
 
 # install hadoop
-wget "https://dlcdn.apache.org/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz" &&
-tar -xvzf hadoop-$HADOOP_VERSION.tar.gz &&
-mv -f hadoop-$HADOOP_VERSION $HADOOP_HOME &&
-rm hadoop-$HADOOP_VERSION.tar.gz &&
+wget "https://dlcdn.apache.org/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz"
+tar -xvzf hadoop-$HADOOP_VERSION.tar.gz
+mv -f hadoop-$HADOOP_VERSION $HADOOP_HOME
+rm hadoop-$HADOOP_VERSION.tar.gz
 # add environment variables
 echo "export JAVA_HOME=\$JAVA_HOME" >>$HADOOP_HOME/etc/hadoop/hadoop-env.sh
 
