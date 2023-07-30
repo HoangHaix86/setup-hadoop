@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manager VMWare Folder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <div class="w-[640px] mx-auto border p-4">
+        <div>
+          <div class="border-b-neutral-b-500 border-b-2">
+            <input
+              type="text"
+              class="w-full h-[40px] p-3 focus:outline-none"
+              value="111111111111111111111111111111111111"
+            />
+          </div>
+          <div class="text-center mt-4">
+            <button
+              type="button"
+              v-on:click="loadDir"
+              class="px-4 py-2 bg-blue-400 rounded-lg text-white font-bold text-lg"
+            >
+              Dir
+            </button>
+          </div>
+        </div>
+
+        <ul v-for="key in Object.keys(vms)">
+          <li>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <i class="w-6 h-6">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon icon-tabler icon-tabler-folders"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path
+                      d="M9 4h3l2 2h5a2 2 0 0 1 2 2v7a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2"
+                    ></path>
+                    <path
+                      d="M17 17v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2h2"
+                    ></path>
+                  </svg>
+                </i>
+                <p>{{vms[key]}}</p>
+              </div>
+              <i class="w-6 h6 text-red-600 cursor-pointer" v-on:click="delVM(key)"->
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="icon icon-tabler icon-tabler-trash"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M4 7l16 0"></path>
+                  <path d="M10 11l0 6"></path>
+                  <path d="M14 11l0 6"></path>
+                  <path
+                    d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"
+                  ></path>
+                  <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                </svg>
+              </i>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+    <script type="module">
+      Vue.createApp({
+        data() {
+          return {
+            wss: null,
+            vms: [],
+          };
+        },
+        methods: {
+          encode(data) {
+            return JSON.stringify(data);
+          },
+          decode(data) {
+            return JSON.parse(data);
+          },
+          loadDir(event) {
+            this.wss.send(
+              this.encode({ type: "GET", data: event.target.value })
+            );
+          },
+          toast(message) {
+            Toastify({
+              text: message,
+              duration: 3000,
+              newWindow: true,
+              close: true,
+              gravity: "top", // `top` or `bottom`
+              position: "right", // `left`, `center` or `right`
+              stopOnFocus: true, // Prevents dismissing of toast on hover
+              style: {
+                background: "linear-gradient(to right, #00b09b, #96c93d)",
+              },
+            }).showToast();
+          },
+          delVM(name) {
+            this.toast("Delete " + name);
+            // this.wss.send(this.encode({ type: "DEL", data: name }));
+          },
+        },
+        created() {
+          this.wss = new WebSocket("ws://localhost:8765");
+          this.wss.onopen = () => {
+            this.toast("WebSocket Client Connected");
+          };
+          this.wss.onmessage = (message) => {
+            console.log(JSON.parse(message.data));
+            this.vms = this.decode(message.data).data;
+          };
+          this.wss.onclose = () => {
+            this.toast("WebSocket Client Disconnected");
+          };
+          this.wss.onerror = (err) => {
+            console.log(err);
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

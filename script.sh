@@ -9,10 +9,11 @@ IP_SLAVE_3=""
 # Update vs upgrade
 sudo apt-get update && sudo apt-get upgrade -y
 
-sudo apt install open-vm-tools-desktop
+# for setup
+# sudo apt install -y git open-vm-tools-desktop 
 
 # Install openssh-server
-sudo apt-get install -y openssh-server python3-lxml openjdk-8-jdk
+sudo apt-get install -y openssh-server python3-lxml openjdk-8-jdk git
 
 # add xmleditor
 sudo cp ./xmleditor.py /usr/local/bin/xmleditor.py &&
@@ -58,10 +59,10 @@ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys &&
 chmod 0600 ~/.ssh/authorized_keys
 
 # add host
-echo "$IP_MASTER master" >>/etc/hosts &&
-echo "$IP_SLAVE_1 master" >>/etc/hosts &&
-echo "$IP_SLAVE_2 master" >>/etc/hosts &&
-echo "$IP_SLAVE_3 master" >>/etc/hosts &&
+# echo "$IP_MASTER master" >>/etc/hosts &&
+# echo "$IP_SLAVE_1 master" >>/etc/hosts &&
+# echo "$IP_SLAVE_2 master" >>/etc/hosts &&
+# echo "$IP_SLAVE_3 master" >>/etc/hosts &&
 
 # config hadoop
 # core-site.xml
@@ -85,7 +86,7 @@ sudo mkdir -p /opt/hadoop/data/namenode &&
 sudo mkdir -p /opt/hadoop/data/datanode
 
 # master
-echo master >$HADOOP_HOME/etc/hadoop/masters
+# echo master >$HADOOP_HOME/etc/hadoop/masters
 
 # workers
-echo slave_1 >$HADOOP_HOME/etc/hadoop/workers &&
+# echo slave_1 >$HADOOP_HOME/etc/hadoop/workers &&
