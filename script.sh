@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/sh
 
 # https://github.com/HoangHaix86/setup-hadoop.git
 # git clone https://github.com/HoangHaix86/setup-hadoop.git && cd setup-hadoop && chmod +x script.sh && ./script.sh
