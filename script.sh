@@ -44,20 +44,20 @@ export HADOOP_COMMON_HOME=\$HADOOP_HOME
 export HADOOP_HDFS_HOME=\$HADOOP_HOME
 export YARN_HOME=\$HADOOP_HOME
 
-echo "export HADOOP_VERSION=3.3.6" >>~/.bashrc
-echo "export HADOOP_HOME=/opt/hadoop" >>~/.bashrc
-echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >>~/.bashrc
-echo "export PATH=\$PATH:\$JAVA_HOME/bin" >>~/.bashrc
+echo "export HADOOP_VERSION=3.3.6" >>/etc/environment
+echo "export HADOOP_HOME=/opt/hadoop" >>/etc/environment
+echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >>/etc/environment
+echo "export PATH=\$PATH:\$JAVA_HOME/bin" >>/etc/environment
 
-echo "export HADOOP_LOG_DIR=\$HADOOP_HOME/logs" >>~/.bashrc
-echo "export HADOOP_CONF_DIR=\$HADOOP_HOME/etc/hadoop" >>~/.bashrc
-echo "export PATH=\$PATH:\$HADOOP_HOME/bin" >>~/.bashrc
-echo "export PATH=\$PATH:\$HADOOP_HOME/sbin" >>~/.bashrc
-echo "export HADOOP_MAPRED_HOME=\$HADOOP_HOME" >>~/.bashrc
-echo "export HADOOP_COMMON_HOME=\$HADOOP_HOME" >>~/.bashrc
-echo "export HADOOP_HDFS_HOME=\$HADOOP_HOME" >>~/.bashrc
-echo "export YARN_HOME=\$HADOOP_HOME" >>~/.bashrc
-source ~/.bashrc
+echo "export HADOOP_LOG_DIR=\$HADOOP_HOME/logs" >>/etc/environment
+echo "export HADOOP_CONF_DIR=\$HADOOP_HOME/etc/hadoop" >>/etc/environment
+echo "export PATH=\$PATH:\$HADOOP_HOME/bin" >>/etc/environment
+echo "export PATH=\$PATH:\$HADOOP_HOME/sbin" >>/etc/environment
+echo "export HADOOP_MAPRED_HOME=\$HADOOP_HOME" >>/etc/environment
+echo "export HADOOP_COMMON_HOME=\$HADOOP_HOME" >>/etc/environment
+echo "export HADOOP_HDFS_HOME=\$HADOOP_HOME" >>/etc/environment
+echo "export YARN_HOME=\$HADOOP_HOME" >>/etc/environment
+source /etc/environment
 
 # install hadoop
 wget "https://dlcdn.apache.org/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz" &&
