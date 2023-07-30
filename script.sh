@@ -28,7 +28,6 @@ sudo cp ./xmleditor.py /usr/local/bin/xmleditor.py &&
 
 sudo chmod -R a+rwx /opt
 
-
 export HADOOP_VERSION=3.3.6
 export HADOOP_HOME=/opt/hadoop
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
@@ -59,13 +58,12 @@ echo "export YARN_HOME=\$HADOOP_HOME" >>~/.bashrc
 
 # install hadoop
 URL="https://dlcdn.apache.org/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz"
-wget $URL &&
-    tar -xvzf hadoop-$HADOOP_VERSION.tar.gz &&
+wget $URL
+tar -xvzf hadoop-$HADOOP_VERSION.tar.gz &&
     mv -f hadoop-$HADOOP_VERSION $HADOOP_HOME &&
     rm hadoop-$HADOOP_VERSION.tar.gz &&
     # add environment variables
     echo "export JAVA_HOME=\$JAVA_HOME" >>$HADOOP_HOME/etc/hadoop/hadoop-env.sh
-
 
 # add host
 # echo "$IP_MASTER master" >>/etc/hosts &&
