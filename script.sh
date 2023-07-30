@@ -52,7 +52,7 @@ echo "export YARN_HOME=\$HADOOP_HOME" >>~/.bashrc
 
 # install hadoop
 wget https://dlcdn.apache.org/hadoop/common/hadoop-3.3.6/hadoop-$HADOOP_VERSION.tar.gz &&
-    tar -xzf hadoop-$HADOOP_VERSION.tar.gz &&
+    tar -xvzf hadoop-$HADOOP_VERSION.tar.gz &&
     mv -f hadoop-$HADOOP_VERSION $HADOOP_HOME &&
     rm hadoop-$HADOOP_VERSION.tar.gz &&
     # add environment variables
