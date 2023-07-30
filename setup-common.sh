@@ -35,37 +35,35 @@ sudo chmod a+x /usr/local/bin/xmleditor.py
 
 sudo chmod -R a+rwx /opt
 
-export HADOOP_VERSION=3.3.6
-export HADOOP_HOME=/opt/hadoop
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-export PATH=$PATH:$JAVA_HOME/bin
+# export HADOOP_VERSION=3.3.6
+# export HADOOP_HOME=/opt/hadoop
+# export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+# export PATH=$PATH:$JAVA_HOME/bin
 
-export HADOOP_LOG_DIR=\$HADOOP_HOME/logs
-export HADOOP_CONF_DIR=\$HADOOP_HOME/etc/hadoop
-export PATH=$PATH:$HADOOP_HOME/bin
-export PATH=$PATH:$HADOOP_HOME/sbin
-export HADOOP_MAPRED_HOME=\$HADOOP_HOME
-export HADOOP_COMMON_HOME=\$HADOOP_HOME
-export HADOOP_HDFS_HOME=\$HADOOP_HOME
-export YARN_HOME=\$HADOOP_HOME
+# export HADOOP_LOG_DIR=$HADOOP_HOME/logs
+# export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+# export PATH=$PATH:$HADOOP_HOME/bin
+# export PATH=$PATH:$HADOOP_HOME/sbin
+# export HADOOP_MAPRED_HOME=$HADOOP_HOME
+# export HADOOP_HDFS_HOME=$HADOOP_HOME
+# export YARN_HOME=$HADOOP_HOME
 
 echo "export HADOOP_VERSION=3.3.6" >>/etc/environment
 echo "export HADOOP_HOME=/opt/hadoop" >>/etc/environment
 echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >>/etc/environment
-echo "export PATH=\$PATH:\$JAVA_HOME/bin" >>/etc/environment
+echo "export PATH=$PATH:$JAVA_HOME/bin" >>/etc/environment
 
-echo "export HADOOP_LOG_DIR=\$HADOOP_HOME/logs" >>/etc/environment
-echo "export HADOOP_CONF_DIR=\$HADOOP_HOME/etc/hadoop" >>/etc/environment
-echo "export PATH=\$PATH:\$HADOOP_HOME/bin" >>/etc/environment
-echo "export PATH=\$PATH:\$HADOOP_HOME/sbin" >>/etc/environment
-echo "export HADOOP_MAPRED_HOME=\$HADOOP_HOME" >>/etc/environment
-echo "export HADOOP_COMMON_HOME=\$HADOOP_HOME" >>/etc/environment
-echo "export HADOOP_HDFS_HOME=\$HADOOP_HOME" >>/etc/environment
-echo "export YARN_HOME=\$HADOOP_HOME" >>/etc/environment
-echo "export HADOOP_CLASSPATH=\$JAVA_HOME/lib/tools.jar" >>/etc/environment
+echo "export HADOOP_LOG_DIR=$HADOOP_HOME/logs" >>/etc/environment
+echo "export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop" >>/etc/environment
+echo "export PATH=$PATH:$HADOOP_HOME/bin" >>/etc/environment
+echo "export PATH=$PATH:$HADOOP_HOME/sbin" >>/etc/environment
+echo "export HADOOP_MAPRED_HOME=$HADOOP_HOME" >>/etc/environment
+echo "export HADOOP_HDFS_HOME=$HADOOP_HOME" >>/etc/environment
+echo "export YARN_HOME=$HADOOP_HOME" >>/etc/environment
+echo "export HADOOP_CLASSPATH=$JAVA_HOME/lib/tools.jar" >>/etc/environment
 echo "export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native" >> /etc/environment
-echo "export HADOOP_OPTS=-Djava.library.path=\$HADOOP_HOME/lib/native" >> etc/environment
-echo "export HADOOP_STREAMING=\$HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-3.2.3.jar" >> etc/environment
+echo "export HADOOP_OPTS=-Djava.library.path=$HADOOP_HOME/lib/native" >> etc/environment
+echo "export HADOOP_STREAMING=$HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-3.2.3.jar" >> etc/environment
 echo "export HADOOP_OPTS=-Djava.net.preferIPv4Stack=true" >> etc/environment
 source /etc/environment
 
@@ -106,4 +104,8 @@ echo $DATANODE1 >$HADOOP_HOME/etc/hadoop/workers
 echo $DATANODE2 >>$HADOOP_HOME/etc/hadoop/workers
 echo $DATANODE3 >>$HADOOP_HOME/etc/hadoop/workers
 
-/opt/hadoop/bin/hadoop namenode –format
+# /opt/hadoop/bin/hadoop namenode –format
+
+# ssh-copy-id -i ~/.ssh/id_rsa.pub hoanghai@DATANODE1:/home/hoanghai/.ssh
+# ssh-copy-id -i ~/.ssh/id_rsa.pub hoanghai@DATANODE2:/home/hoanghai/.ssh
+# ssh-copy-id -i ~/.ssh/id_rsa.pub hoanghai@DATANODE3:/home/hoanghai/.ssh
