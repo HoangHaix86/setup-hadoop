@@ -72,7 +72,7 @@ wget "https://dlcdn.apache.org/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADO
 tar -xvzf hadoop-$HADOOP_VERSION.tar.gz &&
 sudo mv -f hadoop-$HADOOP_VERSION $HADOOP_HOME &&
 rm hadoop-$HADOOP_VERSION.tar.gz &&
-echo "export JAVA_HOME=\$JAVA_HOME" >>$HADOOP_HOME/etc/hadoop/hadoop-env.sh
+echo "export JAVA_HOME=$JAVA_HOME" >>$HADOOP_HOME/etc/hadoop/hadoop-env.sh
 
 # config hadoop
 # core-site.xml
