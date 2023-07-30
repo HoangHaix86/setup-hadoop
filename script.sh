@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # https://github.com/HoangHaix86/setup-hadoop.git
 # rm -rf setup-hadoop git clone https://github.com/HoangHaix86/setup-hadoop.git chmod +x ./setup-hadoop/script.sh sudo ./setup-hadoop/script.sh
@@ -55,7 +55,7 @@ echo "export HADOOP_MAPRED_HOME=\$HADOOP_HOME" >>~/.bashrc
 echo "export HADOOP_COMMON_HOME=\$HADOOP_HOME" >>~/.bashrc
 echo "export HADOOP_HDFS_HOME=\$HADOOP_HOME" >>~/.bashrc
 echo "export YARN_HOME=\$HADOOP_HOME" >>~/.bashrc
-/bin/bash source ~/.bashrc
+source ~/.bashrc
 
 # install hadoop
 wget "https://dlcdn.apache.org/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz" &&
