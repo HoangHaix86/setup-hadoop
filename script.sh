@@ -17,6 +17,14 @@ sudo apt install -y open-vm-tools-desktop
 # Install openssh-server
 sudo apt-get install -y openssh-server python3-lxml openjdk-8-jdk git wget
 
+
+wget "https://dlcdn.apache.org/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz" &&
+tar -xvzf hadoop-$HADOOP_VERSION.tar.gz &&
+mv -f hadoop-$HADOOP_VERSION $HADOOP_HOME &&
+rm hadoop-$HADOOP_VERSION.tar.gz &&
+# add environment variables
+echo "export JAVA_HOME=\$JAVA_HOME" >>$HADOOP_HOME/etc/hadoop/hadoop-env.sh
+
 # ssh
 ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa -y &&
 cat ~/.ssh/id_rsa.pub >>~/.ssh/authorized_keys &&
@@ -57,13 +65,7 @@ echo "export HADOOP_HDFS_HOME=\$HADOOP_HOME" >>~/.bashrc &&
 echo "export YARN_HOME=\$HADOOP_HOME" >>~/.bashrc &&
 source ~/.bashrc &&
 # install hadoop
-URL="https://dlcdn.apache.org/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz"
-wget $URL &&
-tar -xvzf hadoop-$HADOOP_VERSION.tar.gz &&
-mv -f hadoop-$HADOOP_VERSION $HADOOP_HOME &&
-rm hadoop-$HADOOP_VERSION.tar.gz &&
-# add environment variables
-echo "export JAVA_HOME=\$JAVA_HOME" >>$HADOOP_HOME/etc/hadoop/hadoop-env.sh  &&
+
 
 # add host
 # echo "$IP_MASTER master" >>/etc/hosts &&
