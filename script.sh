@@ -9,7 +9,7 @@ IP_SLAVE_3=""
 # Update vs upgrade
 sudo apt-get update && sudo apt-get upgrade -y
 
-sudo apt install open-vm-tools-desktop & sudo reboot
+sudo apt install open-vm-tools-desktop
 
 # Install openssh-server
 sudo apt-get install -y openssh-server python3-lxml openjdk-8-jdk
