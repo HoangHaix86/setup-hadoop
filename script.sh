@@ -76,21 +76,21 @@ wget $URL &&
 
 # config hadoop
 # core-site.xml
-xmleditor.py -a -p $HADOOP_HOME/etc/hadoop/core-site.xml -n fs.defaultFS -v hdfs://master:9000
+./xmleditor.py -a -p $HADOOP_HOME/etc/hadoop/core-site.xml -n fs.defaultFS -v hdfs://master:9000
 
 # hdfs-site.xml
-xmleditor.py -a -p $HADOOP_HOME/etc/hadoop/hdfs-site.xml -n dfs.replication -v 3
-xmleditor.py -a -p $HADOOP_HOME/etc/hadoop/hdfs-site.xml -n dfs.namenode.name.dir -v file:///opt/hadoop/data/namenode
-xmleditor.py -a -p $HADOOP_HOME/etc/hadoop/hdfs-site.xml -n dfs.datanode.data.dir -v file:///opt/hadoop/data/datanode
+./xmleditor.py -a -p $HADOOP_HOME/etc/hadoop/hdfs-site.xml -n dfs.replication -v 3
+./xmleditor.py -a -p $HADOOP_HOME/etc/hadoop/hdfs-site.xml -n dfs.namenode.name.dir -v file:///opt/hadoop/data/namenode
+./xmleditor.py -a -p $HADOOP_HOME/etc/hadoop/hdfs-site.xml -n dfs.datanode.data.dir -v file:///opt/hadoop/data/datanode
 
 # yarn-site.xml
-xmleditor.py -a -p $HADOOP_HOME/etc/hadoop/yarn-site.xml -n yarn.nodemanager.aux-services -v mapreduce_shuffle
-xmleditor.py -a -p $HADOOP_HOME/etc/hadoop/yarn-site.xml -n yarn.nodemanager.aux-services.mapreduce.shuffle.class -v org.apache.hadoop.mapred.ShuffleHandler
-xmleditor.py -a -p $HADOOP_HOME/etc/hadoop/yarn-site.xml -n yarn.resourcemanager.hostname -v master
+./xmleditor.py -a -p $HADOOP_HOME/etc/hadoop/yarn-site.xml -n yarn.nodemanager.aux-services -v mapreduce_shuffle
+./xmleditor.py -a -p $HADOOP_HOME/etc/hadoop/yarn-site.xml -n yarn.nodemanager.aux-services.mapreduce.shuffle.class -v org.apache.hadoop.mapred.ShuffleHandler
+./xmleditor.py -a -p $HADOOP_HOME/etc/hadoop/yarn-site.xml -n yarn.resourcemanager.hostname -v master
 
 # mapred-site.xml
-xmleditor.py -a -p $HADOOP_HOME/etc/hadoop/mapred-site.xml -n mapreduce.framework.name -v yarn
-xmleditor.py -a -p $HADOOP_HOME/etc/hadoop/mapred-site.xml -n mapreduce.jobtracker.address -v master:54311
+./xmleditor.py -a -p $HADOOP_HOME/etc/hadoop/mapred-site.xml -n mapreduce.framework.name -v yarn
+./xmleditor.py -a -p $HADOOP_HOME/etc/hadoop/mapred-site.xml -n mapreduce.jobtracker.address -v master:54311
 
 sudo mkdir -p /opt/hadoop/data/namenode &&
     sudo mkdir -p /opt/hadoop/data/datanode
