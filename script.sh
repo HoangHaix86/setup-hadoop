@@ -1,5 +1,7 @@
 #! /bin/bash
 
+# https://github.com/HoangHaix86/setup-hadoop.git
+
 IP_MASTER=""
 IP_SLAVE_1=""
 IP_SLAVE_2=""
@@ -21,7 +23,7 @@ sudo chmod 777 /usr/local/bin/xmleditor.py
 
 sudo chmod -R 777 /opt
 
-echo "export HADOOP_HOME=/opt/hadoop" >>~/.bashrc &&
+sudo echo "export HADOOP_HOME=/opt/hadoop" >>~/.bashrc &&
 echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >>~/.bashrc &&
 echo "export PATH=\$PATH:\$JAVA_HOME/bin" >>~/.bashrc &&
 source ~/.bashrc
