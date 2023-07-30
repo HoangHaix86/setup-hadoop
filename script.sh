@@ -6,7 +6,7 @@ IP_MASTER=""
 IP_SLAVE_1=""
 IP_SLAVE_2=""
 IP_SLAVE_3=""
-
+HADOOP_VERSION=3.3.6
 
 # Update vs upgrade
 sudo apt-get update && sudo apt-get upgrade -y
@@ -23,13 +23,12 @@ sudo chmod 777 /usr/local/bin/xmleditor.py
 
 sudo chmod -R 777 /opt
 
-sudo echo "export HADOOP_HOME=/opt/hadoop" >>~/.bashrc &&
+echo "export HADOOP_HOME=/opt/hadoop" >>~/.bashrc &&
 echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >>~/.bashrc &&
 echo "export PATH=\$PATH:\$JAVA_HOME/bin" >>~/.bashrc &&
 source ~/.bashrc
 
 # install hadoop
-HADOOP_VERSION=3.3.6 &&
 sudo wget https://dlcdn.apache.org/hadoop/common/hadoop-3.3.6/hadoop-$HADOOP_VERSION.tar.gz &&
 tar -xvzf hadoop-$HADOOP_VERSION.tar.gz &&
 mv -f hadoop-$HADOOP_VERSION $HADOOP_HOME &&
