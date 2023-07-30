@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # https://github.com/HoangHaix86/setup-hadoop.git
-# rm -rf setup-hadoop git clone https://github.com/HoangHaix86/setup-hadoop.git chmod +x ./setup-hadoop/script.sh sudo ./setup-hadoop/script.sh
+# rm -rf setup-hadoop && git clone https://github.com/HoangHaix86/setup-hadoop.git && chmod +x ./setup-hadoop/script.sh && sudo ./setup-hadoop/script.sh
 
 IP_MASTER=""
 IP_SLAVE_1=""
