@@ -30,7 +30,7 @@ if (args.append):
     value = etree.SubElement(property, 'value')
     value.text = args.value
 
-    tree.write(args.path, pretty_print=True, xml_declaration=True, encoding='utf-8')
+    tree.write(args.path, pretty_print=True, encoding='utf-8')
 
     print('Property added')
 
