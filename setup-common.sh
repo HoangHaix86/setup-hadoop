@@ -63,7 +63,6 @@ echo "export YARN_HOME=$HADOOP_HOME" >>/etc/environment
 echo "export HADOOP_CLASSPATH=$JAVA_HOME/lib/tools.jar" >>/etc/environment
 echo "export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native" >> /etc/environment
 echo "export HADOOP_OPTS=-Djava.library.path=$HADOOP_HOME/lib/native" >> etc/environment
-echo "export HADOOP_STREAMING=$HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-3.2.3.jar" >> etc/environment
 echo "export HADOOP_OPTS=-Djava.net.preferIPv4Stack=true" >> etc/environment
 source /etc/environment
 
@@ -93,7 +92,8 @@ xmleditor.py -a -p $HADOOP_CONF_DIR/yarn-site.xml -n yarn.resourcemanager.hostna
 xmleditor.py -a -p $HADOOP_CONF_DIR/mapred-site.xml -n mapreduce.framework.name -v yarn
 xmleditor.py -a -p $HADOOP_CONF_DIR/mapred-site.xml -n mapreduce.jobtracker.address -v namenode:54311
 
-sudo mkdir -p /opt/hadoop/data/namenode
+sudo mkdir -p /opt/hadoop/data/temp
+sudo mkdir -p /opt/hadoop/data/datanode
 sudo mkdir -p /opt/hadoop/data/datanode
 
 # master

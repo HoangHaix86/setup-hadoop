@@ -66,11 +66,10 @@ echo "export HADOOP_CLASSPATH=\$JAVA_HOME/lib/tools.jar" >>/etc/environment
 source /etc/environment
 
 # install hadoop
-wget "https://dlcdn.apache.org/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz" &&
-tar -xvzf hadoop-$HADOOP_VERSION.tar.gz &&
-sudo mv -f hadoop-$HADOOP_VERSION $HADOOP_HOME &&
-rm hadoop-$HADOOP_VERSION.tar.gz &&
-echo "export JAVA_HOME=\$JAVA_HOME" >>$HADOOP_HOME/etc/hadoop/hadoop-env.sh
+wget "https://dlcdn.apache.org/hadoop/common/hadoop-3.3.6/hadoop-3.3.6.tar.gz" &&
+tar -xvzf hadoop-3.3.6.tar.gz &&
+sudo mv -f hadoop-3.3.6 /opt/hadoop &&
+echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >>/opt/hadoop/etc/hadoop/hadoop-env.sh
 
 # add host
 # echo "$IP_MASTER master" >>/etc/hosts
