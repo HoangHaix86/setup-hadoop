@@ -1,30 +1,18 @@
-FROM ubuntu:jammy
+FROM hadoop-base:v1
 
-RUN apt update && apt install -y wget ssh openjdk-8-jdk iputils-ping nano openssh-server
+# RUN apt update && apt install -y wget python3-lxml ssh
 
-RUN wget https://dlcdn.apache.org/hadoop/common/hadoop-3.3.6/hadoop-3.3.6.tar.gz && \
-    tar -xvzf hadoop-3.3.6.tar.gz && \
-    mv hadoop-3.3.6 /opt/hadoop && \
-    rm hadoop-3.3.6.tar.gz  && \
-    echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >> /opt/hadoop/etc/hadoop/hadoop-env.sh
+# COPY ./hadoop-3.3.6.tar.gz ~/
+# COPY ./jdk-8u202-linux-x64.tar.gz ~/
 
-RUN ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa && \
-    cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys && \
-    chmod 0600 ~/.ssh/authorized_keys
+# RUN apt install  openjdk-8-jdk
+# RUN wget https://raw.githubusercontent.com/HoangHaix86/setup-hadoop/main/xmleditor.py && \
+#     cp ./xmleditor.py /usr/local/bin/xmleditor.py && \
+#     chmod a+x /usr/local/bin/xmleditor.py
 
-ADD ./configs/*.xml /opt/hadoop/etc/hadoop/
+# RUN chmod -R a+rwx /opt
 
-ADD ./configs/ssh_config /root/.ssh/config
-
-RUN echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >> /root/.bashrc && \
-    echo "export HADOOP_HOME=/opt/hadoop" >> /root/.bashrc && \
-    echo "export PATH=\$PATH:\$HADOOP_HOME/bin:\$HADOOP_HOME/sbin" >> /root/.bashrc && \
-    echo "export PATH=\$JAVA_HOME/bin:\$PATH" >> /root/.bashrc && \
-    echo "export HADOOP_CLASSPATH=\$JAVA_HOME/lib/tools.jar" >> /root/.bashrc && \
-    echo "export HADOOP_CONF_DIR=\$HADOOP_HOME/etc/hadoop" >> /root/.bashrc && \
-    echo "export HDFS_NAMENODE_USER=root" >> /root/.bashrc && \
-    echo "export HDFS_DATANODE_USER=root" >> /root/.bashrc && \
-    echo "export HDFS_SECONDARYNAMENODE_USER=root" >> /root/.bashrc && \
-    echo "export YARN_RESOURCEMANAGER_USER=root" >> /root/.bashrc && \
-    echo "export YARN_HOME=\$HADOOP_HOME" >> /root/.bashrc && \
-    echo "export YARN_NODEMANAGER_USER=root" >> /root/.bashrc 
+# RUN wget "https://dlcdn.apache.org/hadoop/common/hadoop-3.3.6/hadoop-3.3.6.tar.gz" && \
+#     tar -xvzf hadoop-3.3.6.tar.gz && \
+#     sudo mv -f hadoop-3.3.6 /opt/hadoop && \
+#     echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >>/opt/hadoop/etc/hadoop/hadoop-env.sh

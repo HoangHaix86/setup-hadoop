@@ -25,6 +25,7 @@ sudo mv -f hadoop-3.3.6 /opt/hadoop &&
 echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >>/opt/hadoop/etc/hadoop/hadoop-env.sh
 
 echo "export HADOOP_HOME=/opt/hadoop" | sudo tee -a /etc/environment
+source /etc/environmentsudo
 echo "export HADOOP_INSTALL=\$HADOOP_HOME" | sudo tee -a /etc/environment
 echo "export HADOOP_MAPRED_HOME=\$HADOOP_HOME" | sudo tee -a /etc/environment
 echo "export HADOOP_COMMON_HOME=\$HADOOP_HOME" | sudo tee -a /etc/environment
@@ -73,6 +74,7 @@ sudo mkdir -p /opt/hadoop/data/namenode
 sudo mkdir -p /opt/hadoop/data/datanode
 
 # master
+echo "master" >/opt/hadoop/etc/hadoop/masters
 echo "slave-1" >/opt/hadoop/etc/hadoop/workers
 # echo "slave-2" >/opt/hadoop/etc/hadoop/workers
 # echo "slave-3" >/opt/hadoop/etc/hadoop/workers
