@@ -1,3 +1,0 @@
-Host *
-    UserKnownHostsFile ~/.ssh/known_hosts
-    StrictHostKeyChecking no

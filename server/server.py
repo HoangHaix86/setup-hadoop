@@ -6,64 +6,37 @@ import json
 from slugify import slugify
 import shutil
 
+# class Client:
+
+#     def __init__(self, websocket):
+#         self.websocket = websocket
+#         pprint(f"Client: {self.websocket}")
+#         async for message in self.websocket:
+#             print(message)
+
 class Server:
     def __init__(self):
-        self.vms = {}
-        self.path = r'C:\Users\HoangHai\Documents\Virtual Machines'
+        self.server = None
 
-    async def send(self, websocket, data):
-        json_string = json.dumps(data)
-        await websocket.send(json_string)
+    async def handler(self, websocket, path):
+        # pprint(f"Connected to {path}")
+        # pprint(f"Websocket: {websocket}")
+        print(websocket)
 
-    async def get_folder(self, websocket):
         try:
-            while True:
-                data = {
-                    "type": "GET",
-                    "data": {}
-                }
-                d = os.listdir(self.path)
-                for i in d:
-                    self.vms.update({slugify(i): i})
-                data['data'] = self.vms
-                
-                await self.send(websocket, data)
-                await asyncio.sleep(3)
-            
+            # async for message in websocket:
+            #     print(message)
+            while 1:
+                message = await websocket.recv()
+                pprint(message)
+                await websocket.send("Hello")
         except websockets.exceptions.ConnectionClosed:
-            print("Connection closed")
+            pprint("Connection closed")
             return
 
-    async def delete_folder(self, websocket, vm):
-        pprint(vm)
-        shutil.rmtree(f'{self.path}\\{self.vms[vm]}')
-        del self.vms[vm]
-        data = {
-            "type": "DEl",
-            "data": {},
-            "message": "Deleted"
-        }
-        await self.send(websocket, data)
+    async def start(self):
+        self.server = await websockets.serve(self.handler, "localhost", 8001)
+        await self.server.wait_closed()
 
-
-    async def handler(self, websocket):
-        pprint(websocket)
-        async for message in websocket:
-            data = json.loads(message)
-            pprint(data)
-            if data['type'] == "GET":
-                self.get_folder(websocket)
-                return
-            if data['type'] == "DEL":
-                self.delete_folder(websocket, data['vm'])
-                return
-        
-            
-    
-    def start(self):
-        start_server = websockets.serve(self.handler, "localhost", 8765)
-        asyncio.get_event_loop().run_until_complete(start_server)
-        asyncio.get_event_loop().run_forever()
-        
-        
-Server().start()
+if __name__ == "__main__":
+    asyncio.run(Server().start())

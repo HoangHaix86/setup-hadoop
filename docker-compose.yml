@@ -1,12 +1,29 @@
 version: "3.8"
 
 services:
+  # app:
+  #   image: hadoop-base:1.0
+  #   tty: true
   master:
     container_name: master
-    image: hadoop-base:v2
+    image: hadoop-base:v7
     tty: true
+    hostname: master
+    volumes:
+      - ./script-master.sh:/script-master.sh
 
-  # slave-1:
-  #   container_name: slave-1
-  #   image: hadoop-base:v2
-  #   tty: true
+  slave-1:
+    container_name: slave-1
+    image: hadoop-base:v7
+    tty: true
+    hostname: slave-1
+    volumes:
+      - ./script-slave.sh:/script-slave.sh
+
+  slave-2:
+    container_name: slave-2
+    image: hadoop-base:v7
+    tty: true
+    hostname: slave-2
+    volumes:
+      - ./script-slave.sh:/script-slave.sh
